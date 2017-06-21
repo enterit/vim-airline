@@ -383,6 +383,9 @@ function! s:reset_untracked_cache(shellcmdpost)
   endif
 
   let l:file = expand("%:p")
+  if !exists('b:buffer_vcs_config')
+    call s:init_buffer()
+  endif
   for vcs in keys(s:vcs_config)
     " Dump the value of the cache for the current file. Partially mitigates the
     " issue of cache invalidation happening before a call to
